@@ -3,9 +3,9 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
-connected = sqlite3.connect('office.db')
 
 def check_room_booking(room_number, start_time, end_time):
+    connected = sqlite3.connect('office.db')
     cursor = connected.cursor()
 
     query = """
@@ -24,9 +24,6 @@ def check_room_booking(room_number, start_time, end_time):
 
     if result:
         full_name, booked_end_time = result
-        logging.info(
-            f"Room {room_number} is already booked by {full_name} until {booked_end_time}."
-        )
         return {
             "full_name": full_name,
             "end_time": booked_end_time
@@ -34,12 +31,14 @@ def check_room_booking(room_number, start_time, end_time):
 
     return None
 
+
 def add_booking(full_name, phone, start_time, end_time, room_number):
     booking_info = check_room_booking(room_number, start_time, end_time)
 
     if booking_info:
         return False
 
+    connected = sqlite3.connect('office.db')
     cursor = connected.cursor()
 
     query = """
@@ -53,9 +52,4 @@ def add_booking(full_name, phone, start_time, end_time, room_number):
     )
     connected.commit()
     connected.close()
-
-    logging.info(
-        f"Booking added for {full_name} in room {room_number} "
-        f"from {start_time} to {end_time}."
-    )
     return True
