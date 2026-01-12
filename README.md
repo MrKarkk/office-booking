@@ -4,18 +4,13 @@
 
 #### Установка и настройка
 
-1.  ```  
-    git clone 
-    ```
+ ```  
+    git clone https://github.com/MrKarkk/office-booking.git
+```
 
-2. ```
-   python -m venv venv
-   venv\Scripts\activate  # на Windows
-   ```
-
-3. ```
+```
    python create_db.py
-   ```
+```
 
 ##### Проверка доступности кабинета
 ```
