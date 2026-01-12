@@ -53,3 +53,4 @@ def add_booking(full_name, phone, start_time, end_time, room_number):
     connected.commit()
     connected.close()
     return True
+
